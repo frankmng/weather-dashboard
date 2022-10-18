@@ -6,21 +6,67 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #e0e5ee;
+    /* background-color: #e0e5ee; */
 
 }
 
+.container {
+    margin:0;
+    max-width: 95%;
+}
 
+/* header style */
 .header {
     display: flex;
     justify-content: center;
     flex-direction: row;
-
-
-    background: rgb(131,58,180);
-    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);    padding: 10px;
+    background: rgb(2,0,36);
+    background: linear-gradient(258deg, rgba(2,0,36,1) 13%, rgba(8,66,140,1) 56%, rgba(34,167,187,1) 100%);
+    padding: 8px;
 }
 .header h1 {
     margin-left: 200px;
     color:#fff;
+    font-size: 200%;
+    font-weight: 600;
 }
+/* end style */
+
+/* dashboard style */
+.dashboard {
+    margin-top: 20px;
+}
+
+.search h2{
+    font-weight: 600;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+.btn {
+    width: 100%;
+}
+
+.weather-for-city {
+    padding: 10px;
+    border: 1px solid black;
+    max-width: 85%;
+}
+.weather-forecast {
+    margin-top: 15px;
+
+}
+
+.five-day-forecast {
+    margin-left: 15px;
+}
+
+.card {
+    margin-right: 15px;
+    background-color: navy;
+    
+    color:#fff;
+}
+/* end style */
