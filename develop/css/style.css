@@ -12,7 +12,7 @@ body {
 
 .container {
     margin:0;
-    max-width: 95%;
+    max-width: 100%;
 }
 
 /* header style */
@@ -41,10 +41,7 @@ body {
     font-weight: 600;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: column;
-}
+
 .btn {
     width: 100%;
 }
@@ -65,8 +62,7 @@ body {
 
 .card {
     margin-right: 15px;
-    background-color: rgb(49, 49, 88);
-    
+    background-color: rgb(46, 97, 206);
     color:#fff;
 }
 #city_name {
@@ -75,5 +71,12 @@ body {
 .name_date {
     display: flex;
     flex-direction: row;
+}
+#horizontalLine {
+    margin-top: 10px;
+    border-bottom: 3px solid rgb(156, 156, 156);
+}
+.searchHistoryButtons {
+    margin-top: 10px;
 }
 /* end style */

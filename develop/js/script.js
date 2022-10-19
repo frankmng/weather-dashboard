@@ -38,6 +38,16 @@ var sixthDayTemp = document.querySelector("#sixthDayTemp");
 var sixthDayWind = document.querySelector("#sixthDayWind");
 var sixthDayHumidity = document.querySelector("#sixthDayHumidity");
 
+// variable for sunny or cloudy icon
+var weatherStatus1 = document.querySelector("#weather-icon1");
+var weatherStatus2 = document.querySelector("#weather-icon2");
+var weatherStatus3 = document.querySelector("#weather-icon3");
+var weatherStatus4 = document.querySelector("#weather-icon4");
+var weatherStatus5 = document.querySelector("#weather-icon5");
+
+// variable for search history
+var searchHistory = document.querySelector("#searchHistory");
+
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -121,26 +131,32 @@ function getForecast(url){
             return response.json();
         })
         .then(function(data){
+            console.log(data.list[0].weather[0].main)
             var temp1 = (1.8*((data.list[0].main.temp)-273) + 32).toFixed(2);
+            var weatherStatus1 = data.list[0].weather[0].main;
             var humidity1 = (data.list[0].main.humidity);
             var wind1 = (data.list[0].wind.speed);
-            var weather1 = [temp1, humidity1, wind1];
+            var weather1 = [temp1, humidity1, wind1, weatherStatus1];
             var temp2 = (1.8*((data.list[6].main.temp)-273) + 32).toFixed(2);
+            var weatherStatus2 = data.list[6].weather[0].main;
             var humidity2 = (data.list[6].main.humidity);
             var wind2 = (data.list[6].wind.speed);
-            var weather2 = [temp2, humidity2, wind2];
+            var weather2 = [temp2, humidity2, wind2, weatherStatus2];
             var temp3 = (1.8*((data.list[14].main.temp)-273) + 32).toFixed(2);
+            var weatherStatus3 = data.list[14].weather[0].main;
             var humidity3 = (data.list[14].main.humidity);
             var wind3 = (data.list[14].wind.speed);
-            var weather3 = [temp3, humidity3, wind3];
+            var weather3 = [temp3, humidity3, wind3, weatherStatus3];
             var temp4 = (1.8*((data.list[22].main.temp)-273) + 32).toFixed(2);
+            var weatherStatus4 = data.list[22].weather[0].main;
             var humidity4 = (data.list[22].main.humidity);
             var wind4 = (data.list[22].wind.speed);
-            var weather4 = [temp4, humidity4, wind4];
+            var weather4 = [temp4, humidity4, wind4, weatherStatus4];
             var temp5 = (1.8*((data.list[30].main.temp)-273) + 32).toFixed(2);
+            var weatherStatus5 = data.list[30].weather[0].main;
             var humidity5 = (data.list[30].main.humidity);
             var wind5 = (data.list[30].wind.speed);
-            var weather5 = [temp5, humidity5, wind5];
+            var weather5 = [temp5, humidity5, wind5, weatherStatus5];
             var weatherArr = [weather1, weather2, weather3, weather4, weather5]
             return weatherArr;
         })
@@ -148,22 +164,57 @@ function getForecast(url){
             secondDayTemp.innerHTML = data[0][0] + "°F";
             secondDayHumidity.innerHTML = data[0][1] + " %";
             secondDayWind.innerHTML = data[0][2] + " MPH";
+            if (data[0][3]=== 'Clear') {
+                weatherStatus1.innerHTML = 'Its clear today';
+            }
+            else {
+                weatherStatus1.innerHTML = 'Cloudy';
+
+            }
 
             thirdDayTemp.innerHTML = data[1][0] + "°F";
             thirdDayHumidity.innerHTML = data[1][1] + " %";
             thirdDayWind.innerHTML = data[1][2] + " MPH";
+            if (data[1][3]=== 'Clear') {
+                weatherStatus2.innerHTML = 'Its clear today';
+            }
+            else {
+                weatherStatus2.innerHTML = 'Cloudy';
+
+            }
 
             fourthDayTemp.innerHTML = data[2][0] + "°F";
             fourthDayHumidity.innerHTML = data[2][1] + " %";
             fourthDayWind.innerHTML = data[2][2] + " MPH";
+            if (data[2][3]=== 'Clear') {
+                weatherStatus3.innerHTML = 'Its clear today';
+            }
+            else {
+                weatherStatus3.innerHTML = 'Cloudy';
+
+            }
 
             fifthDayTemp.innerHTML = data[3][0] + "°F";
             fifthDayHumidity.innerHTML = data[3][1] + " %";
             fifthDayWind.innerHTML = data[3][2] + " MPH";
+            if (data[3][3]=== 'Clear') {
+                weatherStatus4.innerHTML = 'Its clear today';
+            }
+            else {
+                weatherStatus4.innerHTML = 'Cloudy';
+
+            }
 
             sixthDayTemp.innerHTML = data[4][0] + "°F";
             sixthDayHumidity.innerHTML = data[4][1] + " %";
             sixthDayWind.innerHTML = data[4][2] + " MPH";
+            if (data[4][3]=== 'Clear') {
+                weatherStatus5.innerHTML = 'Its clear today';
+            }
+            else {
+                weatherStatus5.innerHTML = 'Cloudy';
+
+            }
         })
 
 }
@@ -187,12 +238,23 @@ function getGeoUrl(cityName){
 searchButton.addEventListener("click", () => {
     var input = document.getElementById("searchBar").value;
     getGeoUrl(input);
+    saveSearch(input);
   });
 
 // handle user input on keyboard 'enter'
-searchBar.addEventListener("keydown", () => {
+searchBar.addEventListener("keydown", (event) => {
       if (event.key === 'Enter') {
         var input = document.getElementById("searchBar").value;
         getGeoUrl(input);
+        saveSearch(input);
       }
   });
+
+  // handle search history of user input
+  function saveSearch(input) {
+    localStorage.setItem("input", input)   
+    var button = document.createElement('button');
+    button.classList.add("btn", "btn-secondary", "searchHistoryButtons")
+    button.innerHTML = input
+    searchHistory.appendChild(button)
+  }
