@@ -19,7 +19,24 @@ var sixthDay = document.querySelector("#sixthDay");
 
 // elements for 5 day forecast temperature
 var secondDayTemp = document.querySelector("#secondDayTemp");
+var secondDayWind = document.querySelector("#secondDayWind");
+var secondDayHumidity = document.querySelector("#secondDayHumidity");
 
+var thirdDayTemp = document.querySelector("#thirdDayTemp");
+var thirdDayWind = document.querySelector("#thirdDayWind");
+var thirdDayHumidity = document.querySelector("#thirdDayHumidity");
+
+var fourthDayTemp = document.querySelector("#fourthDayTemp");
+var fourthDayWind = document.querySelector("#fourthDayWind");
+var fourthDayHumidity = document.querySelector("#fourthDayHumidity");
+
+var fifthDayTemp = document.querySelector("#fifthDayTemp");
+var fifthDayWind = document.querySelector("#fifthDayWind");
+var fifthDayHumidity = document.querySelector("#fifthDayHumidity");
+
+var sixthDayTemp = document.querySelector("#sixthDayTemp");
+var sixthDayWind = document.querySelector("#sixthDayWind");
+var sixthDayHumidity = document.querySelector("#sixthDayHumidity");
 
 
 var today = new Date();
@@ -78,17 +95,17 @@ function getGeocoding(url){
         })
 }
 
+// handle current day weather data
 function getCurrentWeather(url){
     fetch(url)
         .then(function (response){
             return response.json();
         })
         .then(function(data){
-            var temp = (data.main.temp);
-            var fahrenheit = (1.8*(temp-273) + 32).toFixed(2);
+            var temp = (1.8*((data.main.temp)-273) + 32).toFixed(2);
             var humidity = (data.main.humidity);
             var wind = (data.wind.speed);
-            var weather = [fahrenheit, humidity, wind];
+            var weather = [temp, humidity, wind];
             return weather;
         })
         .then(function(data){
@@ -97,11 +114,56 @@ function getCurrentWeather(url){
             wind.innerHTML = data[2] + " MPH";
         })
 }
-
+// handle 5 day forecast weather data
 function getForecast(url){
     fetch(url)
         .then(function (response){
-            console.log(response.json());
+            return response.json();
+        })
+        .then(function(data){
+            var temp1 = (1.8*((data.list[0].main.temp)-273) + 32).toFixed(2);
+            var humidity1 = (data.list[0].main.humidity);
+            var wind1 = (data.list[0].wind.speed);
+            var weather1 = [temp1, humidity1, wind1];
+            var temp2 = (1.8*((data.list[6].main.temp)-273) + 32).toFixed(2);
+            var humidity2 = (data.list[6].main.humidity);
+            var wind2 = (data.list[6].wind.speed);
+            var weather2 = [temp2, humidity2, wind2];
+            var temp3 = (1.8*((data.list[14].main.temp)-273) + 32).toFixed(2);
+            var humidity3 = (data.list[14].main.humidity);
+            var wind3 = (data.list[14].wind.speed);
+            var weather3 = [temp3, humidity3, wind3];
+            var temp4 = (1.8*((data.list[22].main.temp)-273) + 32).toFixed(2);
+            var humidity4 = (data.list[22].main.humidity);
+            var wind4 = (data.list[22].wind.speed);
+            var weather4 = [temp4, humidity4, wind4];
+            var temp5 = (1.8*((data.list[30].main.temp)-273) + 32).toFixed(2);
+            var humidity5 = (data.list[30].main.humidity);
+            var wind5 = (data.list[30].wind.speed);
+            var weather5 = [temp5, humidity5, wind5];
+            var weatherArr = [weather1, weather2, weather3, weather4, weather5]
+            return weatherArr;
+        })
+        .then(function(data){
+            secondDayTemp.innerHTML = data[0][0] + "°F";
+            secondDayHumidity.innerHTML = data[0][1] + " %";
+            secondDayWind.innerHTML = data[0][2] + " MPH";
+
+            thirdDayTemp.innerHTML = data[1][0] + "°F";
+            thirdDayHumidity.innerHTML = data[1][1] + " %";
+            thirdDayWind.innerHTML = data[1][2] + " MPH";
+
+            fourthDayTemp.innerHTML = data[2][0] + "°F";
+            fourthDayHumidity.innerHTML = data[2][1] + " %";
+            fourthDayWind.innerHTML = data[2][2] + " MPH";
+
+            fifthDayTemp.innerHTML = data[3][0] + "°F";
+            fifthDayHumidity.innerHTML = data[3][1] + " %";
+            fifthDayWind.innerHTML = data[3][2] + " MPH";
+
+            sixthDayTemp.innerHTML = data[4][0] + "°F";
+            sixthDayHumidity.innerHTML = data[4][1] + " %";
+            sixthDayWind.innerHTML = data[4][2] + " MPH";
         })
 
 }
