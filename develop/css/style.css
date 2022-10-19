@@ -69,4 +69,11 @@ body {
     
     color:#fff;
 }
+#city_name {
+    margin-right: 10px;
+}
+.name_date {
+    display: flex;
+    flex-direction: row;
+}
 /* end style */
