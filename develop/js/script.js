@@ -47,7 +47,10 @@ var weatherStatus5 = document.querySelector("#weather-icon5");
 
 // variable for search history
 var searchHistory = document.querySelector("#searchHistory");
+var clearHistory = document.querySelector("#clearHistory");
 
+// variable for weather icon
+var weatherIcon = document.querySelector("#weather-icon")
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -112,18 +115,26 @@ function getCurrentWeather(url){
             return response.json();
         })
         .then(function(data){
+            console.log(data)
+
             var temp = (1.8*((data.main.temp)-273) + 32).toFixed(2);
             var humidity = (data.main.humidity);
             var wind = (data.wind.speed);
-            var weather = [temp, humidity, wind];
+            var icon = (data.weather[0].icon);
+            var weather = [temp, humidity, wind, icon];
+            localStorage.setItem("currentWeather", weather)
             return weather;
         })
         .then(function(data){
             temp.innerHTML = data[0] + "°F";
             humidity.innerHTML = data[1] + " %";
             wind.innerHTML = data[2] + " MPH";
+            var icon =  data[3]
+            weatherIcon.innerHTML = "<img src=http://openweathermap.org/img/wn/" + icon + ".png" + ">";
+            console.log("/" + data[3])
         })
 }
+
 // handle 5 day forecast weather data
 function getForecast(url){
     fetch(url)
@@ -158,6 +169,7 @@ function getForecast(url){
             var wind5 = (data.list[30].wind.speed);
             var weather5 = [temp5, humidity5, wind5, weatherStatus5];
             var weatherArr = [weather1, weather2, weather3, weather4, weather5]
+            localStorage.setItem("weatherArr", weatherArr)
             return weatherArr;
         })
         .then(function(data){
@@ -219,7 +231,6 @@ function getForecast(url){
 
 }
 
-
 function getWeather(lat, lon) {
     var forecastUrl = 'http://api.openweathermap.org/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + lon + '&appid=' + 'c48964af8db3fee241118134e5122c3f'
     var cUrl = currentUrl + 'lat=' + lat + '&lon=' + lon  + '&appid=' + 'c48964af8db3fee241118134e5122c3f'
@@ -250,11 +261,28 @@ searchBar.addEventListener("keydown", (event) => {
       }
   });
 
+  var items = [];
   // handle search history of user input
   function saveSearch(input) {
-    localStorage.setItem("input", input)   
+    items.push(input);
+    localStorage.setItem("item", JSON.stringify(items));
     var button = document.createElement('button');
     button.classList.add("btn", "btn-secondary", "searchHistoryButtons")
     button.innerHTML = input
     searchHistory.appendChild(button)
+    button.addEventListener("click", () => {
+        getGeoUrl(input);
+      });
+
+    // for (var i = 0; i < items.length; i++) {
+    //     if (items.length > 5) {
+    //         items.splice(0, 1) 
+    //     }
+    //     else {        
+    //         button.innerHTML = input
+    //         searchHistory.appendChild(button)
+    //     }
+    // }
+
   }
+
