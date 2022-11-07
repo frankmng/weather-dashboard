@@ -7,7 +7,7 @@
 
 The purpose of this project is to allow a user to search for a city's current and next 5-day weather forecast. The weather interface will display temperature, wind speeds, and humidity levels for the current day and next 5 days. An icon is presented to allow the user to easily visualize the weather forecast. Each city's search is saved to the local storage and is displayed under the search bar to be used in search again.
 
-Link to app: https://frankmng.github.io/weather-forecast/
+Link to app: https://frankmng.github.io/weather-dashboard/
 
 ## Installation
 
