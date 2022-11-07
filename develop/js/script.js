@@ -49,7 +49,7 @@ var weatherStatus5 = document.querySelector("#weather-icon5");
 var searchHistory = document.querySelector("#searchHistory");
 var clearHistory = document.querySelector("#clearHistory");
 
-// variable for weather icon
+// variable for current weather icon
 var weatherIcon = document.querySelector("#weather-icon")
 
 var today = new Date();
@@ -215,6 +215,7 @@ function getForecast(url){
 
 }
 
+// handle lat and lon for forecast url
 function getWeather(lat, lon) {
     var forecastUrl = 'http://api.openweathermap.org/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + lon + '&appid=' + 'c48964af8db3fee241118134e5122c3f'
     var cUrl = currentUrl + 'lat=' + lat + '&lon=' + lon  + '&appid=' + 'c48964af8db3fee241118134e5122c3f'
@@ -245,7 +246,9 @@ searchBar.addEventListener("keydown", (event) => {
       }
   });
 
+  // array to hold items in local storage
   var items = [];
+
   // handle search history of user input
   function saveSearch(input) {
     items.push(input);
