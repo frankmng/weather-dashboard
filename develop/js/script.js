@@ -217,7 +217,7 @@ function getForecast(url){
 
 // handle lat and lon for forecast url
 function getWeather(lat, lon) {
-    var forecastUrl = 'http://api.openweathermap.org/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + lon + '&appid=' + 'c48964af8db3fee241118134e5122c3f'
+    var forecastUrl = 'https://api.openweathermap.org/data/2.5/forecast?' + 'lat=' + lat + '&lon=' + lon + '&appid=' + 'c48964af8db3fee241118134e5122c3f'
     var cUrl = currentUrl + 'lat=' + lat + '&lon=' + lon  + '&appid=' + 'c48964af8db3fee241118134e5122c3f'
     getCurrentWeather(cUrl)
     getForecast(forecastUrl)
