@@ -130,7 +130,7 @@ function getCurrentWeather(url){
             humidity.innerHTML = data[1] + " %";
             wind.innerHTML = data[2] + " MPH";
             var icon =  data[3]
-            weatherIcon.innerHTML = "<img src=https//openweathermap.org/img/wn/" + icon + ".png" + ">";
+            weatherIcon.innerHTML = "<img src=https://openweathermap.org/img/wn/" + icon + ".png" + ">";
             console.log("/" + data[3])
         })
 }
